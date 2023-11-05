@@ -1,7 +1,7 @@
 import './styles.css'
-import { ReactComponent as YouTubeIcon } from './Youtube.svg';
-import { ReactComponent as LinkedinIcon } from './Linkedin.svg';
-import { ReactComponent as InstagramIcon } from './Instagram.svg';
+import { ReactComponent as YouTubeIcon } from '../assets/Youtube.svg';
+import { ReactComponent as LinkedinIcon } from '../assets/Linkedin.svg';
+import { ReactComponent as InstagramIcon } from '../assets/Instagram.svg';
 function Footer(){
   return (
     <footer className="main-footer">
