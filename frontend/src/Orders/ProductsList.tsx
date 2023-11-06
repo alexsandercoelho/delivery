@@ -16,7 +16,7 @@ function ProductsList({ products, selectedProducts }: Props) {
            <ProductCard 
            key={product.id} 
            product={product}
-           onSelectProduct={onSelectProduct,s}
+           onSelectProduct={onSelectProducts}
            isSelected={checkIsSelected}
            /> 
         ))} 

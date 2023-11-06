@@ -1,13 +1,14 @@
 package com.apcoelhodev.delivery.dto;
 
+import com.apcoelhodev.delivery.entities.Order;
+import com.apcoelhodev.delivery.entities.OrderStatus;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-
-import com.apcoelhodev.delivery.entities.Order;
-import com.apcoelhodev.delivery.entities.OrderStatus;
 
 public class OrderDTO implements Serializable {
 	
@@ -19,13 +20,13 @@ public class OrderDTO implements Serializable {
 	private Double longitude;
 	private Instant moment;
 	private OrderStatus status;
-	
+	private Double total;
 	private List<ProductDTO> products = new ArrayList<>();
 
 	public OrderDTO(){
 	}
 
-	public OrderDTO(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
+	public OrderDTO(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status, Double total) {
 		super();
 		this.id = id;
 		this.address = address;
@@ -33,6 +34,7 @@ public class OrderDTO implements Serializable {
 		this.longitude = longitude;
 		this.moment = moment;
 		this.status = status;
+		this.total = total;
 	}
 	
 	public OrderDTO(Order entity) {
@@ -43,6 +45,7 @@ public class OrderDTO implements Serializable {
 		longitude = entity.getLongitude();
 		moment = entity.getMoment();
 		status = entity.getStatus();
+		total = entity.getTotal();
 		products = entity.getProducts().stream()
 				.map(x -> new ProductDTO(x)).collect(Collectors.toList());
 	}
@@ -93,6 +96,11 @@ public class OrderDTO implements Serializable {
 
 	public void setStatus(OrderStatus status) {
 		this.status = status;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(total);
 	}
 
 	public List<ProductDTO> getProducts() {

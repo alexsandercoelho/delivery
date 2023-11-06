@@ -11,9 +11,9 @@ import { checkIsSelected } from './helpers';
 import './styles.css';
 function Orders(){
   const [products, setProducts] = useState<Product[]>([]);
-  const [selectedproducts, setSelectedProducts] = useState<Product[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
   const [orderLocation, setOrderLocation] = useState<OrderLocationData>();
-  const totalPrice = selectedproducts.reduce((sum, item) => {
+  const totalPrice = selectedProducts.reduce((sum, item) => {
     return sum + item.price;
   }, 0); 
   
@@ -24,24 +24,24 @@ function Orders(){
   }, []);
 
   const handleSelectProduct = (product: Product) => {
-    const isAlreadySelected = checkIsSelected(selectedproducts, product);
+    const isAlreadySelected = checkIsSelected(selectedProducts, product);
   
     if (isAlreadySelected) {
-      const selected = selectedproducts.filter(item => item.id !== product.id);
+      const selected = selectedProducts.filter(item => item.id !== product.id);
       setSelectedProducts(selected);
     } else {
       setSelectedProducts(previous => [...previous, product]);
     }
   }
   const handleSubmit = () => {
-    const productsIds = selectedproducts.map(({ id }) => ({ id }));
+    const productsIds = selectedProducts.map(({ id }) => ({ id }));
     const payload = {
       ...orderLocation!,
       products: productsIds
     }
   
-    saveOrder(payload).then(() => {
-      toast.error('Pedido enviado com sucesso!');
+    saveOrder(payload).then((response) => {
+      toast.error(`Pedido enviado com sucesso! N.${response.data.id}`);
       setSelectedProducts([]);
     })
       .catch(() => {
@@ -55,13 +55,13 @@ function Orders(){
         <ProductsList 
         products={products}
         onSelectProduct={handleSelectProduct}
-        selectedProducts={selectedproducts} 
+        selectedProducts={selectedProducts} 
         />
         <OrderLocation 
         onChangeLocation={location => setOrderLocation(location)}
         />
         <OrderSummary 
-          amount={selectedproducts.length}
+          amount={selectedProducts.length}
           totalPrice={totalPrice} 
           onSubmit={handleSubmit}  
         />

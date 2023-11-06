@@ -1,7 +1,7 @@
 import { Product } from "./types";
 
 export function checkIsSelected(selectProducts: Product[], product: Product) {
-  return selectedProducts.some(item => item.id === product.id);
+  return selectProducts.some(item => item.id === product.id);
 }
 
 export function formatPrice(price: number) {

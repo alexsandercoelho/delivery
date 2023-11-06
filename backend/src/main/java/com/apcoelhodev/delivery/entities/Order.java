@@ -1,20 +1,12 @@
 package com.apcoelhodev.delivery.entities;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_order")
@@ -34,9 +26,7 @@ public class Order implements Serializable{
 	@JoinTable(name = "tb_order_product",
 		joinColumns = @JoinColumn(name = "order_id"),
 		inverseJoinColumns = @JoinColumn(name = "product_id"))
-	 /** 
-	  * Set nao aceita repeticao do mesmo item <> list
-	 */
+
 	private Set<Product> products = new HashSet<>(); 	
 	
 	public Order() {
@@ -94,20 +84,34 @@ public class Order implements Serializable{
 	}
 
 	public OrderStatus getStatus() {
+
 		return status;
 	}
 
 	public void setStatus(OrderStatus status) {
+
 		this.status = status;
 	}
 
+	public Double getTotal() {
+		double sum = 0.0;
+		for (Product p : products) {
+			sum += p.getPrice();
+		}
+		return sum;
+	}
+
 	public Set<Product> getProducts() {
+
 		return products;
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public int hashCode()
+	{	final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
