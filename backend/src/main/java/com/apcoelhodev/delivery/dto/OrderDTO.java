@@ -98,9 +98,12 @@ public class OrderDTO implements Serializable {
 		this.status = status;
 	}
 	
-	@Override
-	public int hashCode() {
-		return Objects.hash(total);
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
 	public List<ProductDTO> getProducts() {
