@@ -4,10 +4,13 @@ import Header from '../Header';
 import OrderCard from '../OrderCard';
 import { fetchOrders } from '../api';
 import { Order } from '../types';
+import { useNavigation } from '@react-navigation/native';
+
 
 function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation ();
 
   // Fetch orders when component mounts
   useEffect(() => {
@@ -18,6 +21,11 @@ function Orders() {
     .finally(() => setIsLoading(false));
   }, []);
   
+  const handleOnPress = (order: Order) => {
+    navigation.navigate('OrderDetails', {
+      order
+    });
+  }
   return (
     <>
       <Header />
@@ -26,7 +34,8 @@ function Orders() {
           <Text>Buscando pedidos...</Text>
           ) : (
             orders.map(order => (
-              <TouchableWithoutFeedback key={order.id}>
+              <TouchableWithoutFeedback 
+                key={order.id} onPress={() => handleOnPress(order)}>
                 <OrderCard order={order} />
               </TouchableWithoutFeedback>
             ))
