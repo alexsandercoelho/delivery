@@ -13,9 +13,9 @@ function ProductsList({ products, selectedProducts }: Props) {
     <div className="orders-list-container">
       <div className="orders-list-items">
         {products.map(product => (
-           <ProductCard 
-           key={product.id} 
-           product={product}
+         <ProductCard 
+          key={product.id} 
+         product={product}
            onSelectProduct={onSelectProducts}
            isSelected={checkIsSelected}
            /> 
