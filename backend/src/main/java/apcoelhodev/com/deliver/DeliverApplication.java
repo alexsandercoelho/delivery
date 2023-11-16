@@ -1,13 +1,13 @@
-package com.apcoelhodev.delivery;
+package apcoelhodev.com.deliver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DeliveryApplication {
+public class DeliverApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DeliveryApplication.class, args);
+		SpringApplication.run(DeliverApplication.class, args);
 	}
 
 }

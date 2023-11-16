@@ -1,10 +1,10 @@
-package com.apcoelhodev.delivery;
+package apcoelhodev.com.deliver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeliveryApplicationTests {
+class DeliverApplicationTests {
 
 	@Test
 	void contextLoads() {
